@@ -5,34 +5,38 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
     Rigidbody2D rb;
     [SerializeField] float speed = 10f;
-    [SerializeField] float jumpSpeed = 10f;
+    [SerializeField] float jumpSpeed = 300f;
+    [SerializeField] ParticleSystem hitParticle;
+    [SerializeField] float particleScale = 1000f;
+    [SerializeField] float particleVelThresh = 20f; //If vel less than this no particles.
 
-    private bool onGround = false;
+    private Vector2 v;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update() {
+        v = rb.velocity;
         float horizontal = Input.GetAxis("Horizontal");
-        Vector3 movement = new Vector3(horizontal, rb.velocity.y, 0f);
-        rb.velocity = movement * speed;
+        Vector2 movement = new Vector3(horizontal*speed, v.y);
+        rb.velocity = movement;
 
-        if (Input.GetKeyDown("space") && onGround == true) {
-            Vector3 jumpMovement = new Vector3(0.0f, 1.0f, 0.0f);
-            rb.velocity = jumpMovement * jumpSpeed;
+        if (Input.GetKeyDown("space")) {
+            v = rb.velocity;
+            Vector3 jumpMovement = new Vector3(v.x, 1.0f*jumpSpeed);
+            rb.velocity = jumpMovement;
         }
     }
-
-    void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.CompareTag("Ground")) {
-            onGround = true;
+    private void OnCollisionEnter2D(Collision2D collision) {
+        // todo: destroy particle object after played. (invoke death)
+        ContactPoint2D contact = collision.GetContact(0);
+        Vector2 pos = contact.point;
+        if (v.sqrMagnitude > particleVelThresh) {
+            float x = v.sqrMagnitude / particleScale;
+            Vector2 newScale = new Vector2(x, x);
+            hitParticle.transform.localScale = newScale;
+            Instantiate(hitParticle, pos, Quaternion.identity);
         }
     }
-
-    void OnCollisionExit(Collision collisionInfo) {
-        if (collisionInfo.gameObject.CompareTag("Ground")) {
-            onGround = false;
-        }
-    }
-
 }
