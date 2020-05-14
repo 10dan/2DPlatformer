@@ -5,9 +5,13 @@ using UnityEngine;
 public class BulletCollisionHandler : MonoBehaviour {
     [SerializeField] GameObject player;
     [SerializeField] ParticleSystem bulletDestroyParticle;
+    [SerializeField] AudioClip[] hitSounds;
+
+    AudioSource audio;
     Collider playerCollider;
     bool isActive = true;
     private void Start() {
+        audio = GetComponent<AudioSource>();
         playerCollider = player.GetComponent<Collider>();
     }
     private void Update() {
@@ -24,10 +28,13 @@ public class BulletCollisionHandler : MonoBehaviour {
     }
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.tag == "Enemy") {
+            int hitSoundIndex = UnityEngine.Random.Range(0, hitSounds.Length);
+            audio.PlayOneShot(hitSounds[hitSoundIndex]);
             ContactPoint2D col = collision.GetContact(0);
             Vector2 pos = col.point;
             Instantiate(bulletDestroyParticle, pos, Quaternion.identity);
             isActive = false;
+
         }
     }
 }

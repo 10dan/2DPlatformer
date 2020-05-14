@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
     Rigidbody2D rb;
+    AudioSource audio;
+
+    [SerializeField] AudioClip[] gunSounds;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject flashEffect;
     [SerializeField] ParticleSystem hitParticle;
@@ -22,21 +25,37 @@ public class PlayerMovement : MonoBehaviour {
     private Vector2 v;
 
     void Start() {
+        retrieveComponents();
+    }
+
+    private void retrieveComponents() {
         rb = GetComponent<Rigidbody2D>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Update() {
-        v = rb.velocity;
+        processMovement();
+        processJump();
+        processGuns();
+        processFlash();
+    }
+
+    private void processMovement() {
+        Vector2 v = rb.velocity;
         float horizontal = Input.GetAxis("Horizontal");
         Vector2 movement = new Vector3(horizontal * speed, v.y);
         rb.velocity = movement;
+    }
 
+    private void processJump() {
         if (Input.GetButtonDown("Jump")) {
-            v = rb.velocity;
+            Vector2 v = rb.velocity;
             Vector3 jumpMovement = new Vector3(v.x, 1.0f * jumpSpeed);
             rb.velocity = jumpMovement;
         }
+    }
 
+    private void processGuns() {
         if (Input.GetButtonDown("Fire1")) {
             Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouse.z = 0;
@@ -45,20 +64,9 @@ public class PlayerMovement : MonoBehaviour {
             float xVel = Mathf.Cos(angle) * bulletVel;
             float yVel = Mathf.Sin(angle) * bulletVel;
             createdBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(xVel, yVel);
-        }
 
-        processFlash();
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision) {
-        ContactPoint2D contact = collision.GetContact(0);
-        Vector2 pos = contact.point;
-        if (v.sqrMagnitude > particleVelThresh) {
-            float x = v.sqrMagnitude / particleScale;
-            Vector2 newScale = new Vector2(x, x);
-            hitParticle.transform.localScale = newScale;
-            Instantiate(hitParticle, pos, Quaternion.identity);
+            int randomSoundIndex = UnityEngine.Random.Range(0,gunSounds.Length);
+            audio.PlayOneShot(gunSounds[randomSoundIndex]);
         }
     }
 
@@ -76,4 +84,16 @@ public class PlayerMovement : MonoBehaviour {
             Instantiate(flashEffect, transform.position, Quaternion.identity);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        ContactPoint2D contact = collision.GetContact(0);
+        Vector2 pos = contact.point;
+        if (v.sqrMagnitude > particleVelThresh) {
+            float x = v.sqrMagnitude / particleScale;
+            Vector2 newScale = new Vector2(x, x);
+            hitParticle.transform.localScale = newScale;
+            Instantiate(hitParticle, pos, Quaternion.identity);
+        }
+    }
+
 }
