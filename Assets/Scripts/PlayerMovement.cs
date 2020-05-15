@@ -11,13 +11,13 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject flashEffect;
     [SerializeField] ParticleSystem hitParticle;
-
-    [SerializeField] float particleScale = 1000f;
-    [SerializeField] float particleVelThresh = 20f; //If vel less than this no particles.
+    [SerializeField] GameObject bombPrefab;
 
     [SerializeField] float speed = 10f;
     [SerializeField] float jumpSpeed = 300f;
+    [SerializeField] float bombVel = 10f;
     [SerializeField] float bulletVel = 100f;
+    [SerializeField] float bulletPosOffset = 10f;
     [SerializeField] float flashDistance = 1.5f;
 
 
@@ -38,7 +38,9 @@ public class PlayerMovement : MonoBehaviour {
         processJump();
         processGuns();
         processFlash();
+        processCharge();
     }
+
 
     private void processMovement() {
         Vector2 v = rb.velocity;
@@ -57,12 +59,16 @@ public class PlayerMovement : MonoBehaviour {
 
     private void processGuns() {
         if (Input.GetButtonDown("Fire1")) {
-            Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mouse.z = 0;
-            GameObject createdBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+            Vector3 mouse3d = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mouse = mouse3d;
             float angle = Mathf.Atan2(mouse.y - transform.position.y, mouse.x - transform.position.x);
             float xVel = Mathf.Cos(angle) * bulletVel;
             float yVel = Mathf.Sin(angle) * bulletVel;
+            //offset so bullet doesnt spawn inside the player
+            float xOffset = Mathf.Cos(angle) * bulletPosOffset;
+            float yOffset = Mathf.Sin(angle) * bulletPosOffset;
+            Vector3 bullsetSpawnPos = transform.position + new Vector3(xOffset, yOffset, 0);
+            GameObject createdBullet = Instantiate(bullet, bullsetSpawnPos, Quaternion.identity);
             createdBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(xVel, yVel);
 
             int randomSoundIndex = UnityEngine.Random.Range(0,gunSounds.Length);
@@ -85,14 +91,18 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        ContactPoint2D contact = collision.GetContact(0);
-        Vector2 pos = contact.point;
-        if (v.sqrMagnitude > particleVelThresh) {
-            float x = v.sqrMagnitude / particleScale;
-            Vector2 newScale = new Vector2(x, x);
-            hitParticle.transform.localScale = newScale;
-            Instantiate(hitParticle, pos, Quaternion.identity);
+
+    private void processCharge() {
+        if (Input.GetButtonDown("Fire2")) {
+            Vector3 mouse3d = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mouse = mouse3d;
+            float angle = Mathf.Atan2(mouse.y - transform.position.y, mouse.x - transform.position.x);
+            float xVel = Mathf.Cos(angle) * bombVel;
+            float yVel = Mathf.Sin(angle) * bombVel;
+            GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+            Rigidbody2D rbBomb = bomb.GetComponent<Rigidbody2D>();
+            rbBomb.velocity = new Vector2(xVel, yVel);
+            rbBomb.angularVelocity = UnityEngine.Random.Range(50f,300f);
         }
     }
 

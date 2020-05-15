@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8785958001352290197}
   - component: {fileID: 7608167380433484005}
   - component: {fileID: 2340288051661191688}
+  - component: {fileID: 1344382474407188424}
   m_Layer: 0
   m_Name: on bullet death particle
   m_TagString: Untagged
@@ -4754,3 +4755,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1344382474407188424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5487330827325214612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3009da01e957b2240932311c4d4f5461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathTimer: 1
+  fx: {fileID: 0}
+  playParticle: 0

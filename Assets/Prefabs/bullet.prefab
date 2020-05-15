@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathTimer: 3
-  onBulletDeathParticle: {fileID: 7608167380433484005, guid: 488bd996a3e379f4c853e383cff98bd2,
-    type: 3}
+  fx: {fileID: 7608167380433484005, guid: 488bd996a3e379f4c853e383cff98bd2, type: 3}
+  playParticle: 1
 --- !u!114 &4028661769668789773
 MonoBehaviour:
   m_ObjectHideFlags: 0
