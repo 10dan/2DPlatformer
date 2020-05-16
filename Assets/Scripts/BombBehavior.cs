@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BombBehavior : MonoBehaviour {
+
     Rigidbody2D rb;
-    [SerializeField] int numFrags = 20;
+
+    [SerializeField] int numFrags = 200;
     [SerializeField] float bombVel = 2f;
     [SerializeField] GameObject frag;
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update() {
-        Explode();
-    }
     private void OnCollisionEnter2D(Collision2D collision) {
         rb.Sleep();
     }
 
-    private void Explode() {
+    public void Explode() {
         float angleSpacer = 2 * Mathf.PI/numFrags;
         for(int i = 0; i < numFrags; i++) {
             float angle = i * angleSpacer;

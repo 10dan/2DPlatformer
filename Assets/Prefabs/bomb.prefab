@@ -143,6 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4748f4046baf5254fb3fee089ff4e49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numFrags: 100
-  bombVel: 200
+  numFrags: 200
+  bombVel: 20
   frag: {fileID: 5542633453815804091, guid: c3301da427c2d7143a2bb079503ca20e, type: 3}

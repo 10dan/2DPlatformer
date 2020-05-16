@@ -21,8 +21,8 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] float flashDistance = 1.5f;
 
 
-
-    private Vector2 v;
+    bool hasCharge = false;
+    GameObject bomb;
 
     void Start() {
         retrieveComponents();
@@ -94,15 +94,22 @@ public class PlayerMovement : MonoBehaviour {
 
     private void processCharge() {
         if (Input.GetButtonDown("Fire2")) {
-            Vector3 mouse3d = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 mouse = mouse3d;
-            float angle = Mathf.Atan2(mouse.y - transform.position.y, mouse.x - transform.position.x);
-            float xVel = Mathf.Cos(angle) * bombVel;
-            float yVel = Mathf.Sin(angle) * bombVel;
-            GameObject bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
-            Rigidbody2D rbBomb = bomb.GetComponent<Rigidbody2D>();
-            rbBomb.velocity = new Vector2(xVel, yVel);
-            rbBomb.angularVelocity = UnityEngine.Random.Range(50f,300f);
+            if (hasCharge == false) {
+                hasCharge = true;
+                Vector3 mouse3d = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mouse = mouse3d;
+                float angle = Mathf.Atan2(mouse.y - transform.position.y, mouse.x - transform.position.x);
+                float xVel = Mathf.Cos(angle) * bombVel;
+                float yVel = Mathf.Sin(angle) * bombVel;
+                bomb = Instantiate(bombPrefab, transform.position, Quaternion.identity);
+                Rigidbody2D rbBomb = bomb.GetComponent<Rigidbody2D>();
+                rbBomb.velocity = new Vector2(xVel, yVel);
+                rbBomb.angularVelocity = UnityEngine.Random.Range(50f, 300f);
+            } else {
+                hasCharge = false;
+                BombBehavior bombBehavior = bomb.GetComponent<BombBehavior>();
+                bombBehavior.Explode();
+            }
         }
     }
 
