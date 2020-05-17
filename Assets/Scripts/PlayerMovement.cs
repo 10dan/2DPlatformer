@@ -72,6 +72,7 @@ public class PlayerMovement : MonoBehaviour {
             createdBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(xVel, yVel);
 
             int randomSoundIndex = UnityEngine.Random.Range(0,gunSounds.Length);
+            audio.pitch = UnityEngine.Random.Range(0.5f, 1.5f);
             audio.PlayOneShot(gunSounds[randomSoundIndex]);
         }
     }
@@ -88,6 +89,11 @@ public class PlayerMovement : MonoBehaviour {
             Instantiate(flashEffect, transform.position, Quaternion.identity);
             transform.position = new Vector2(pos.x + x, pos.y + y);
             Instantiate(flashEffect, transform.position, Quaternion.identity);
+
+            //Shake camera
+            GameObject go = GameObject.Find("Main Camera");
+            CameraShake shaker = (CameraShake)go.GetComponent(typeof(CameraShake));
+            shaker.Shake(0.1f, 0.1f);
         }
     }
 

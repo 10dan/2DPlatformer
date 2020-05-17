@@ -160,10 +160,9 @@ MonoBehaviour:
     type: 3}
   bombPrefab: {fileID: 3045975760370900767, guid: c1bbd3c33ac145449bdd1f0ccc786a2c,
     type: 3}
-  particleScale: 300
-  particleVelThresh: 90
   speed: 10
   jumpSpeed: 10
+  bombVel: 10
   bulletVel: 20
   bulletPosOffset: 0.5
   flashDistance: 2
@@ -178,8 +177,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.824
   m_Pitch: 1
   Loop: 0
   Mute: 0

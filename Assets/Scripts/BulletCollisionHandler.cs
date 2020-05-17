@@ -28,8 +28,11 @@ public class BulletCollisionHandler : MonoBehaviour {
     }
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.tag == "Enemy") {
+            //Choose hit sound
             int hitSoundIndex = UnityEngine.Random.Range(0, hitSounds.Length);
+            audio.pitch = UnityEngine.Random.Range(0.7f, 1.5f);
             audio.PlayOneShot(hitSounds[hitSoundIndex]);
+
             ContactPoint2D col = collision.GetContact(0);
             Vector2 pos = col.point;
             Instantiate(bulletDestroyParticle, pos, Quaternion.identity);
