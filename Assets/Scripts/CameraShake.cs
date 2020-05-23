@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour {
 
-    private Transform transform;
+    private Transform trans;
     float shakeDuration;
     float shakeMagnitude;
     Vector3 initialPosition;
     float timeLeft = 0f;
 
     void Awake() {
-        if (transform == null) {
-            transform = GetComponent(typeof(Transform)) as Transform;
+        if (trans == null) {
+            trans = GetComponent(typeof(Transform)) as Transform;
         }
     }
 
-    void OnEnable() {
-        initialPosition = transform.localPosition;
-    }
-
     void Update() {
+        initialPosition = trans.localPosition;
         if (timeLeft > 0) {
-            transform.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude;
+            trans.localPosition = initialPosition + Random.insideUnitSphere * shakeMagnitude;
 
             timeLeft -= Time.deltaTime;
         } else {
             timeLeft = 0f;
-            transform.localPosition = initialPosition;
         }
     }
 

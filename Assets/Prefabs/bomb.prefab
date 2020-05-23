@@ -97,7 +97,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 19f743dc9d1bdc0459e89be6148e7661, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.302
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -243,4 +243,4 @@ MonoBehaviour:
   numFrags: 200
   bombVel: 20
   frag: {fileID: 5542633453815804091, guid: c3301da427c2d7143a2bb079503ca20e, type: 3}
-  explodeSound: {fileID: 8300000, guid: 19f743dc9d1bdc0459e89be6148e7661, type: 3}
+  explodeSound: {fileID: 8300000, guid: 3da354d943677714faa36c733a527b53, type: 3}

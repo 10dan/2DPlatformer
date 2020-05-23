@@ -5,7 +5,7 @@ using UnityEngine;
 public class DeleteAfterTime : MonoBehaviour {
     [SerializeField] int deathTimer = 3;
     [SerializeField] ParticleSystem fx;
-    [SerializeField] bool playParticle = false;
+    public bool playParticle = false;
     private void Awake() {
         Invoke("DestroyThis", deathTimer);
     }

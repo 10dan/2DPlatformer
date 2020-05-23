@@ -6,6 +6,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
     Rigidbody2D rb;
     AudioSource audio;
+    bool hasCharge = false;
+    GameObject bomb;
+    Animator anim;
+    int jumpCount = 0;
+    int maxJumps = 2;
 
     [SerializeField] AudioClip[] gunSounds;
     [SerializeField] GameObject bullet;
@@ -14,23 +19,27 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] GameObject bombPrefab;
 
     [SerializeField] float speed = 10f;
-    [SerializeField] float jumpSpeed = 300f;
+
+    [SerializeField] float fallMultiplier = 2.5f;
+    [SerializeField] float lowJumpMultiplyer = 2f;
+    [SerializeField] float jumpVelocity = 10f;
+
     [SerializeField] float bombVel = 10f;
     [SerializeField] float bulletVel = 100f;
     [SerializeField] float bulletPosOffset = 10f;
     [SerializeField] float flashDistance = 1.5f;
 
 
-    bool hasCharge = false;
-    GameObject bomb;
 
-    void Start() {
+
+    void Awake() {
         retrieveComponents();
     }
 
     private void retrieveComponents() {
         rb = GetComponent<Rigidbody2D>();
         audio = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
     }
 
     void Update() {
@@ -47,13 +56,19 @@ public class PlayerMovement : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         Vector2 movement = new Vector3(horizontal * speed, v.y);
         rb.velocity = movement;
+        anim.SetFloat("Speed", horizontal);
     }
 
     private void processJump() {
-        if (Input.GetButtonDown("Jump")) {
-            Vector2 v = rb.velocity;
-            Vector3 jumpMovement = new Vector3(v.x, 1.0f * jumpSpeed);
-            rb.velocity = jumpMovement;
+        if (Input.GetButtonDown("Jump") && jumpCount < maxJumps) {
+            anim.SetTrigger("Jump");
+            GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
+            jumpCount++;
+        }
+        if(rb.velocity.y < 0) {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
+        }else if(rb.velocity.y > 0 && !Input.GetButton("Jump")) {
+            rb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplyer * Time.deltaTime;
         }
     }
 
@@ -97,7 +112,6 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-
     private void processCharge() {
         if (Input.GetButtonDown("Fire2")) {
             if (hasCharge == false) {
@@ -118,5 +132,7 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
     }
-
+    private void OnCollisionEnter2D(Collision2D collision) {
+        jumpCount = 0;
+    }
 }

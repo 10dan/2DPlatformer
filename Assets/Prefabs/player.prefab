@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1145395193862795436}
   - component: {fileID: 1126791793}
   - component: {fileID: 308354748}
+  - component: {fileID: 1563650504}
   m_Layer: 8
   m_Name: player
   m_TagString: Player
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3138393931844095956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.25055224, y: 1.6664363, z: -0.50007474}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 2.1382916, y: 2.1382916, z: 2.1382916}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -74,7 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f841861a903e574d95f121beeb7fced, type: 3}
+  m_Sprite: {fileID: 3178392365342531639, guid: cae1c88678afb894098e0345a09ee0b3,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,7 +107,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &1145395193862795436
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -161,11 +163,13 @@ MonoBehaviour:
   bombPrefab: {fileID: 3045975760370900767, guid: c1bbd3c33ac145449bdd1f0ccc786a2c,
     type: 3}
   speed: 10
-  jumpSpeed: 10
+  fallMultiplier: 3
+  lowJumpMultiplyer: 5
+  jumpVelocity: 15
   bombVel: 10
-  bulletVel: 20
+  bulletVel: 26
   bulletPosOffset: 0.5
-  flashDistance: 2
+  flashDistance: 2.5
 --- !u!82 &308354748
 AudioSource:
   m_ObjectHideFlags: 0
@@ -262,3 +266,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1563650504
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3138393931844095956}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e8b44c2cf6329f3419b9a96b21e9c336, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

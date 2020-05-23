@@ -7,10 +7,12 @@ public class BulletCollisionHandler : MonoBehaviour {
     [SerializeField] ParticleSystem bulletDestroyParticle;
     [SerializeField] AudioClip[] hitSounds;
 
+    DeleteAfterTime deleteScript;
     AudioSource audio;
     Collider playerCollider;
     bool isActive = true;
     private void Start() {
+        deleteScript = GetComponent<DeleteAfterTime>();
         audio = GetComponent<AudioSource>();
         playerCollider = player.GetComponent<Collider>();
     }
@@ -24,6 +26,7 @@ public class BulletCollisionHandler : MonoBehaviour {
             cc.enabled = false;
             rb2d.velocity = new Vector2(0f, 0f);
             rb2d.gravityScale = 0f;
+            deleteScript.playParticle = false;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision) {
