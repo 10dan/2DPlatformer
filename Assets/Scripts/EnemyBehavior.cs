@@ -4,12 +4,37 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour {
     [SerializeField] ParticleSystem onDeath;
+    [SerializeField] AudioClip[] hitSounds;
+    [SerializeField] ParticleSystem bulletDestroyParticle;
     [SerializeField] float recoverySpeed = 0.04f;
+    [SerializeField] int numLives = 3;
+    AudioSource audio;
     float lastHit = 0f; //Time since last time hit.
 
+    private void Awake() {
+        audio = GetComponent<AudioSource>();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.name == "bullet(Clone)") {
+        if (collision.gameObject.tag == "Bullet or Bomb") {
             lastHit = 0f;
+            numLives--;
+
+            ContactPoint2D col = collision.GetContact(0);
+            Vector2 pos = col.point;
+            if (numLives >= 1) {
+                int hitSoundIndex = UnityEngine.Random.Range(0, hitSounds.Length);
+                audio.pitch = UnityEngine.Random.Range(0.7f, 1.5f);
+                audio.PlayOneShot(hitSounds[hitSoundIndex]);
+                Instantiate(bulletDestroyParticle, pos, Quaternion.identity);
+            } else {
+                Instantiate(onDeath, pos, Quaternion.identity);
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<CircleCollider2D>().enabled = false;
+                Destroy(gameObject);
+
+            }
+
         }
     }
 

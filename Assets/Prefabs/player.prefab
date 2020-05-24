@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 3138393931844095956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.25055224, y: 1.6664363, z: -0.50007474}
-  m_LocalScale: {x: 2.1382916, y: 2.1382916, z: 2.1382916}
+  m_LocalScale: {x: 2.513315, y: 2.513315, z: 2.513315}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,13 +75,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3178392365342531639, guid: cae1c88678afb894098e0345a09ee0b3,
+  m_Sprite: {fileID: -7862396843884538191, guid: e7be009a8e7386342b878974314612a3,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.47, y: 0.98}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -160,6 +160,9 @@ MonoBehaviour:
     type: 3}
   hitParticle: {fileID: 6343013285155222917, guid: cb30f3b03614b0f4fb55bf4c20906cc1,
     type: 3}
+  bloodParticle: {fileID: 8997825635871597981, guid: cb1d6bed08effb24cb74e2fcf5eccf64,
+    type: 3}
+  bloodSound: {fileID: 8300000, guid: 19f743dc9d1bdc0459e89be6148e7661, type: 3}
   bombPrefab: {fileID: 3045975760370900767, guid: c1bbd3c33ac145449bdd1f0ccc786a2c,
     type: 3}
   speed: 10
@@ -168,7 +171,7 @@ MonoBehaviour:
   jumpVelocity: 15
   bombVel: 10
   bulletVel: 26
-  bulletPosOffset: 0.5
+  bulletPosOffset: 1.5
   flashDistance: 2.5
 --- !u!82 &308354748
 AudioSource:

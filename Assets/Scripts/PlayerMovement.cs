@@ -2,20 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
+
     Rigidbody2D rb;
     AudioSource audio;
-    bool hasCharge = false;
+
     GameObject bomb;
     Animator anim;
     int jumpCount = 0;
     int maxJumps = 2;
+    int lives = GlobalVars.initLives;
+    bool hasCharge = false;
+    bool isDead = false;
 
     [SerializeField] AudioClip[] gunSounds;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject flashEffect;
     [SerializeField] ParticleSystem hitParticle;
+
+    [SerializeField] ParticleSystem bloodParticle;
+    [SerializeField] AudioClip bloodSound;
     [SerializeField] GameObject bombPrefab;
 
     [SerializeField] float speed = 10f;
@@ -43,11 +51,13 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update() {
-        processMovement();
-        processJump();
-        processGuns();
-        processFlash();
-        processCharge();
+        if (!isDead) {
+            processMovement();
+            processJump();
+            processGuns();
+            processFlash();
+            processCharge();
+        }
     }
 
 
@@ -65,9 +75,9 @@ public class PlayerMovement : MonoBehaviour {
             GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
             jumpCount++;
         }
-        if(rb.velocity.y < 0) {
+        if (rb.velocity.y < 0) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
-        }else if(rb.velocity.y > 0 && !Input.GetButton("Jump")) {
+        } else if (rb.velocity.y > 0 && !Input.GetButton("Jump")) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplyer * Time.deltaTime;
         }
     }
@@ -86,7 +96,7 @@ public class PlayerMovement : MonoBehaviour {
             GameObject createdBullet = Instantiate(bullet, bullsetSpawnPos, Quaternion.identity);
             createdBullet.GetComponent<Rigidbody2D>().velocity = new Vector2(xVel, yVel);
 
-            int randomSoundIndex = UnityEngine.Random.Range(0,gunSounds.Length);
+            int randomSoundIndex = UnityEngine.Random.Range(0, gunSounds.Length);
             audio.pitch = UnityEngine.Random.Range(0.5f, 1.5f);
             audio.PlayOneShot(gunSounds[randomSoundIndex]);
         }
@@ -133,6 +143,32 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
     private void OnCollisionEnter2D(Collision2D collision) {
-        jumpCount = 0;
+        switch (collision.gameObject.tag) {
+            case ("Ground"):
+                jumpCount = 0;
+                break;
+            case ("Bullet or Bomb"):
+                takeDamage();
+                break;
+            case ("Enemy"):
+                takeDamage();
+                break;
+        }
+
+
+    }
+
+    private void takeDamage() {
+        lives--;
+        if(lives < 1) {
+            isDead = true;
+        }
+        Instantiate(bloodParticle, transform.position, Quaternion.identity);
+        audio.Stop();
+        audio.PlayOneShot(bloodSound);
+        GameObject go = GameObject.Find("Main Camera");
+        CameraShake shaker = (CameraShake)go.GetComponent(typeof(CameraShake));
+        shaker.Shake(0.1f, 0.5f);
+        GameObject.Find("Text").GetComponent<CanvasOperator>().SetText("Lives:" + lives.ToString());
     }
 }
