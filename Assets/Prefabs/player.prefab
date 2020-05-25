@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,6 +155,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 52efc47a642bb604f98c50cfba8a5ea0, type: 3}
   - {fileID: 8300000, guid: ef471f0764596064094c69ac51867ba2, type: 3}
   - {fileID: 8300000, guid: fe2c1e3619eea1b4e823fb96f81b6c29, type: 3}
+  bloodSounds: []
   bullet: {fileID: 8975936238941136912, guid: 936e071838365bc4b8ef8a045e3deb6f, type: 3}
   flashEffect: {fileID: 5916555211518239911, guid: f4ab72f268259aa4fa5ef50a3a0ab2c4,
     type: 3}
@@ -162,7 +163,6 @@ MonoBehaviour:
     type: 3}
   bloodParticle: {fileID: 8997825635871597981, guid: cb1d6bed08effb24cb74e2fcf5eccf64,
     type: 3}
-  bloodSound: {fileID: 8300000, guid: 19f743dc9d1bdc0459e89be6148e7661, type: 3}
   bombPrefab: {fileID: 3045975760370900767, guid: c1bbd3c33ac145449bdd1f0ccc786a2c,
     type: 3}
   speed: 10

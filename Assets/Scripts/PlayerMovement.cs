@@ -18,12 +18,11 @@ public class PlayerMovement : MonoBehaviour {
     bool isDead = false;
 
     [SerializeField] AudioClip[] gunSounds;
+    [SerializeField] AudioClip[] bloodSounds;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject flashEffect;
     [SerializeField] ParticleSystem hitParticle;
-
     [SerializeField] ParticleSystem bloodParticle;
-    [SerializeField] AudioClip bloodSound;
     [SerializeField] GameObject bombPrefab;
 
     [SerializeField] float speed = 10f;
@@ -159,13 +158,22 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void takeDamage() {
+        //Check if dead.
         lives--;
         if(lives < 1) {
             isDead = true;
         }
-        Instantiate(bloodParticle, transform.position, Quaternion.identity);
+
+        //play ouch sound
         audio.Stop();
-        audio.PlayOneShot(bloodSound);
+        int randomSoundIndex = UnityEngine.Random.Range(0, bloodSounds.Length);
+        audio.pitch = UnityEngine.Random.Range(0.5f, 1.5f);
+        audio.PlayOneShot(bloodSounds[randomSoundIndex]);
+    
+        //Make blood effect
+        Instantiate(bloodParticle, transform.position, Quaternion.identity);
+
+        //Shake camera
         GameObject go = GameObject.Find("Main Camera");
         CameraShake shaker = (CameraShake)go.GetComponent(typeof(CameraShake));
         shaker.Shake(0.1f, 0.5f);
