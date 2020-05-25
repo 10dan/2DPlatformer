@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BulletCollisionHandler : MonoBehaviour {
     DeleteAfterTime deleteScript;
-    Collider playerCollider;
     bool isActive = true;
 
     private void Start() {

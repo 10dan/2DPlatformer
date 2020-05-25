@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Bullet
+  - Bomb
   - Bullet or Bomb
   layers:
   - Default

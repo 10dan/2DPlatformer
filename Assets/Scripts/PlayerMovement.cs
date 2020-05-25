@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour {
             case ("Ground"):
                 jumpCount = 0;
                 break;
-            case ("Bullet or Bomb"):
+            case ("Bomb"):
                 takeDamage();
                 break;
             case ("Enemy"):

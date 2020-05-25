@@ -16,7 +16,7 @@ public class EnemyBehavior : MonoBehaviour {
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Bullet or Bomb") {
+        if (collision.gameObject.tag == "Bullet" || collision.gameObject.tag == "Bomb") {
             lastHit = 0f;
             numLives--;
 
@@ -41,8 +41,8 @@ public class EnemyBehavior : MonoBehaviour {
     private void Update() {
         SpriteRenderer renderer = GetComponent<SpriteRenderer>();
         float r = Mathf.Lerp(0, 1, lastHit);
-        float g = Mathf.Lerp(0, 1, lastHit);
-        float b = Mathf.Lerp(0, 1, lastHit);
+        float g = Mathf.Lerp(1, 0, lastHit);
+        float b = Mathf.Lerp(1, 0, lastHit);
         Color currentColor = new Color(r, g, b);
         renderer.color = currentColor;
         lastHit = Mathf.Clamp(lastHit + recoverySpeed, 0, 1);
