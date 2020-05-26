@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.LWRP;
 
 public class BulletCollisionHandler : MonoBehaviour {
     DeleteAfterTime deleteScript;
@@ -10,6 +11,8 @@ public class BulletCollisionHandler : MonoBehaviour {
         deleteScript = GetComponent<DeleteAfterTime>();
     }
     private void Update() {
+        GetComponentInChildren<UnityEngine.Experimental.Rendering.Universal.Light2D>().intensity =
+            GetComponentInChildren<UnityEngine.Experimental.Rendering.Universal.Light2D>().intensity - 0.01f;
         if (!isActive) {
             //Disable renderer, collider, and rigid body, not trail.
             SpriteRenderer sr = GetComponent<SpriteRenderer>();

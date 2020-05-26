@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.LWRP;
 
 public class BombBehavior : MonoBehaviour {
 
@@ -24,6 +25,9 @@ public class BombBehavior : MonoBehaviour {
     }
 
     public void Explode() {
+
+        //Disable glow
+        GetComponentInChildren<UnityEngine.Experimental.Rendering.Universal.Light2D>().intensity = 0 ;
 
         //Throw frags in radial
         float angleSpacer = 2 * Mathf.PI/numFrags;
