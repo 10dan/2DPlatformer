@@ -27,7 +27,7 @@ public class BombBehavior : MonoBehaviour {
     public void Explode() {
 
         //Disable glow
-        GetComponentInChildren<UnityEngine.Experimental.Rendering.Universal.Light2D>().intensity = 0 ;
+        GetComponentInChildren<UnityEngine.Experimental.Rendering.Universal.Light2D>().intensity = 0.01f ;
 
         //Throw frags in radial
         float angleSpacer = 2 * Mathf.PI/numFrags;

@@ -63,9 +63,14 @@ public class PlayerMovement : MonoBehaviour {
     private void processMovement() {
         Vector2 v = rb.velocity;
         float horizontal = Input.GetAxis("Horizontal");
+        if(horizontal <= Mathf.Epsilon) {
+            GetComponent<SpriteRenderer>().flipX = true;
+        } else {
+            GetComponent<SpriteRenderer>().flipX = false;
+        }
         Vector2 movement = new Vector3(horizontal * speed, v.y);
         rb.velocity = movement;
-        anim.SetFloat("Speed", horizontal);
+        anim.SetFloat("Speed", Mathf.Abs(horizontal));
     }
 
     private void processJump() {
@@ -162,6 +167,7 @@ public class PlayerMovement : MonoBehaviour {
         lives--;
         if(lives < 1) {
             isDead = true;
+            GameObject.Find("gameOver").GetComponent<EnableText>().SetTextVisible(true);
         }
 
         //play ouch sound
@@ -177,6 +183,6 @@ public class PlayerMovement : MonoBehaviour {
         GameObject go = GameObject.Find("Main Camera");
         CameraShake shaker = (CameraShake)go.GetComponent(typeof(CameraShake));
         shaker.Shake(0.1f, 0.5f);
-        GameObject.Find("Text").GetComponent<CanvasOperator>().SetText("Lives:" + lives.ToString());
+        GameObject.Find("Score").GetComponent<CanvasOperator>().SetText("Lives:" + lives.ToString());
     }
 }

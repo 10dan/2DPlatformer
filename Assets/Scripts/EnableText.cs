@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CanvasOperator : MonoBehaviour {
+public class EnableText : MonoBehaviour {
     Text text;
 
     void Start() {
         text = GetComponent<Text>();
-        text.text = "Lives: " + GlobalVars.initLives;
+        text.enabled = false;
     }
 
-    public void SetText(string textIn) {
-        text.text = textIn;
+    public void SetTextVisible(bool state) {
+        text.enabled = state;
     }
 }

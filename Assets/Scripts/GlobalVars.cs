@@ -3,5 +3,5 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GlobalVars : MonoBehaviour {
-    public const int initLives = 10;
+    public const int initLives = 3;
 }
