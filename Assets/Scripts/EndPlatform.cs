@@ -18,6 +18,8 @@ public class EndPlatform : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.collider.tag == "Player") {
             GameObject.Find("LevelComplete").GetComponent<EnableText>().SetTextVisible(true);
+            GlobalVars.currentLevel += 1;
+            LevelController.LoadLevel(GlobalVars.currentLevel);
         }
     }
 }

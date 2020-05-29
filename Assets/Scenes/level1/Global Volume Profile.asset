@@ -29,15 +29,15 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   threshold:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0.93
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 3.47
+    m_Value: 1.43
     min: 0
   scatter:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0.722
     min: 0
     max: 1
@@ -46,7 +46,7 @@ MonoBehaviour:
     m_Value: 65472
     min: 0
   tint:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
     hdr: 0
     showAlpha: 0
@@ -55,9 +55,9 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   dirtTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 2800000, guid: 088c0bc16a760d3429a8be83f4ab7f90, type: 3}
   dirtIntensity:
-    m_OverrideState: 1
-    m_Value: 3.66
+    m_OverrideState: 0
+    m_Value: 0
     min: 0

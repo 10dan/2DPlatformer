@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LightType: 3
-  m_BlendStyleIndex: 3
+  m_BlendStyleIndex: 1
   m_FalloffIntensity: 1
-  m_Color: {r: 0.6320754, g: 0.012393637, b: 0, a: 1}
-  m_Intensity: 4.67
+  m_Color: {r: 0.31132078, g: 0.0058010085, b: 0, a: 1}
+  m_Intensity: 2
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: bdf0e74700000000
   m_LightCookieSprite: {fileID: 0}
@@ -188,25 +188,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45a82c1655fa8ea459c5f1f4f8aa4174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onDeath: {fileID: 5916555211518239905, guid: f4ab72f268259aa4fa5ef50a3a0ab2c4, type: 3}
+  onDeath: {fileID: 8844182034277780394, guid: 4f312401740a49b46862fc095af83538, type: 3}
   hitSounds:
-  - {fileID: 8300000, guid: e8ff4941b1660ec47b672aec57510248, type: 3}
-  - {fileID: 8300000, guid: 4077339e0d0efdb4bbcfadf3eda8b493, type: 3}
-  - {fileID: 8300000, guid: 2a66ff1128c77274994f80e292487749, type: 3}
-  - {fileID: 8300000, guid: 17c3c6112ca778e4a9043a5489a392e7, type: 3}
-  - {fileID: 8300000, guid: 5d5401aa6347272428500b6c95ac72a2, type: 3}
-  - {fileID: 8300000, guid: 6fc7e5ce86b881e458c43cf1a29369b5, type: 3}
-  - {fileID: 8300000, guid: 0a7a4db34a04d144e9610da3bbdf7e0e, type: 3}
-  - {fileID: 8300000, guid: 9b6431c894f063147b810d8e3f140653, type: 3}
-  - {fileID: 8300000, guid: d405c0eeb61a0374fbd03a733b9c67a6, type: 3}
-  - {fileID: 8300000, guid: 61f36582bf918ef43b60e2bd493ef9c1, type: 3}
-  - {fileID: 8300000, guid: e8d830247d9d41b488900f78f15a1ce5, type: 3}
-  - {fileID: 8300000, guid: 71ad4ce1b01610e4c90dff6c9367cd42, type: 3}
-  - {fileID: 8300000, guid: f19e1bf7334ec77428b2f8f9ad7e27e8, type: 3}
-  - {fileID: 8300000, guid: 03a32e8737ecb76429e75bd6278855aa, type: 3}
-  - {fileID: 8300000, guid: 096845d27cfd20c47bde256eb40c5c37, type: 3}
-  - {fileID: 8300000, guid: 5a34723016740fe4d8873f2623a4f7d6, type: 3}
-  - {fileID: 8300000, guid: fa0f310ec36a5194ea2c6fea3c91ec83, type: 3}
+  - {fileID: 8300000, guid: e281191258b0aee46af3577f0bef6b4a, type: 3}
+  - {fileID: 8300000, guid: 738c950e69bc5d64db1c46fe7f3ec6f5, type: 3}
+  - {fileID: 8300000, guid: 76d9925842d721d48b86162b108d7f82, type: 3}
+  - {fileID: 8300000, guid: 5d945a6ec74c4b147a907a4ec4c05af2, type: 3}
+  - {fileID: 8300000, guid: 20a943edd1fe79043a3f9e95714ec409, type: 3}
+  - {fileID: 8300000, guid: 81279422be5b1dd419bc728be986ca5e, type: 3}
   bulletDestroyParticle: {fileID: 6343013285155222917, guid: c35cd50d2e76d1243847cb5f46b5ef98,
     type: 3}
   recoverySpeed: 0.01
