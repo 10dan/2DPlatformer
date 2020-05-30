@@ -12,5 +12,6 @@ public class LevelController : MonoBehaviour {
         } else {
             SceneManager.LoadScene(id);
         }
+        GlobalVars.isPlaying = true;
     }
 }

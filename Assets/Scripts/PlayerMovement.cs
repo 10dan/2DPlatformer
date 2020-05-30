@@ -172,12 +172,17 @@ public class PlayerMovement : MonoBehaviour {
 
 
     }
+    private IEnumerator ResetLevel() {
+        yield return new WaitForSeconds(2f);
+        LevelController.LoadLevel(GlobalVars.currentLevel);
+    }
 
     private void takeDamage(int dmg) {
         //Check if dead.
         hp -= dmg;
         if (hp < 1) {
             isDead = true;
+            StartCoroutine(ResetLevel());
             GameObject.Find("gameOver").GetComponent<EnableText>().SetTextVisible(true);
         }
 

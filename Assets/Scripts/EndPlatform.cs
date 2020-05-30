@@ -8,6 +8,8 @@ public class EndPlatform : MonoBehaviour {
     [SerializeField] float initialIntensity = 1f;
     [SerializeField] AudioClip endNoise;
 
+
+
     UnityEngine.Experimental.Rendering.Universal.Light2D light;
     void Start() {
         light = GetComponentInChildren<UnityEngine.Experimental.Rendering.Universal.Light2D>();
@@ -18,7 +20,8 @@ public class EndPlatform : MonoBehaviour {
         light.intensity = value;
     }
     private void OnCollisionEnter2D(Collision2D collision) {
-        if(collision.collider.tag == "Player") {
+        if(collision.collider.tag == "Player" && GlobalVars.isPlaying) {
+            GlobalVars.isPlaying = false;
             GameObject.Find("LevelComplete").GetComponent<EnableText>().SetTextVisible(true);
             GlobalVars.currentLevel += 1;
             SoundManager.Instance.Play(endNoise);

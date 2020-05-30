@@ -5,4 +5,5 @@ using UnityEngine;
 public class GlobalVars : MonoBehaviour {
     public const int initLives = 100;
     public static int currentLevel = 0;
+    public static bool isPlaying = true;
 }
