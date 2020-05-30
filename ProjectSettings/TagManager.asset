@@ -8,7 +8,7 @@ TagManager:
   - Enemy
   - Bullet
   - Bomb
-  - Bullet or Bomb
+  - Bad
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour {
     Animator anim;
     int jumpCount = 0;
     int maxJumps = 2;
-    int lives = GlobalVars.initLives;
+    int hp = GlobalVars.initLives;
     bool hasCharge = false;
     bool isDead = false;
 
@@ -64,9 +64,9 @@ public class PlayerMovement : MonoBehaviour {
         Vector2 v = rb.velocity;
         float horizontal = Input.GetAxis("Horizontal");
         if(horizontal <= Mathf.Epsilon) {
-            GetComponent<SpriteRenderer>().flipX = true;
-        } else {
             GetComponent<SpriteRenderer>().flipX = false;
+        } else {
+            GetComponent<SpriteRenderer>().flipX = true;
         }
         Vector2 movement = new Vector3(horizontal * speed, v.y);
         rb.velocity = movement;
@@ -75,7 +75,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private void processJump() {
         if (Input.GetButtonDown("Jump") && jumpCount < maxJumps) {
-            anim.SetTrigger("Jump");
+            anim.SetTrigger("hasJumped");
+            if(jumpCount >= 1) {
+                anim.SetTrigger("ShouldFlip");
+            }
             GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
             jumpCount++;
         }
@@ -152,20 +155,23 @@ public class PlayerMovement : MonoBehaviour {
                 jumpCount = 0;
                 break;
             case ("Bomb"):
-                takeDamage();
+                takeDamage(10);
                 break;
             case ("Enemy"):
-                takeDamage();
+                takeDamage(30);
+                break;
+            case ("Bad"):
+                takeDamage(100);
                 break;
         }
 
 
     }
 
-    private void takeDamage() {
+    private void takeDamage(int dmg) {
         //Check if dead.
-        lives--;
-        if(lives < 1) {
+        hp-= dmg;
+        if(hp < 1) {
             isDead = true;
             GameObject.Find("gameOver").GetComponent<EnableText>().SetTextVisible(true);
         }
@@ -183,6 +189,6 @@ public class PlayerMovement : MonoBehaviour {
         GameObject go = GameObject.Find("Main Camera");
         CameraShake shaker = (CameraShake)go.GetComponent(typeof(CameraShake));
         shaker.Shake(0.1f, 0.5f);
-        GameObject.Find("Score").GetComponent<CanvasOperator>().SetText("Lives:" + lives.ToString());
+        GameObject.Find("Score").GetComponent<CanvasOperator>().SetText("Lives:" + hp.ToString());
     }
 }

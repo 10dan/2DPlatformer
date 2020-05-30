@@ -19,7 +19,12 @@ public class EndPlatform : MonoBehaviour {
         if(collision.collider.tag == "Player") {
             GameObject.Find("LevelComplete").GetComponent<EnableText>().SetTextVisible(true);
             GlobalVars.currentLevel += 1;
-            LevelController.LoadLevel(GlobalVars.currentLevel);
+            StartCoroutine(Delay(2f));
         }
+    }
+
+    IEnumerator Delay(float delay) {
+        yield return new WaitForSeconds(delay);
+        LevelController.LoadLevel(GlobalVars.currentLevel);
     }
 }

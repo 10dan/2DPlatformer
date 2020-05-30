@@ -83,6 +83,11 @@ PrefabInstance:
       propertyPath: m_PointLightDistance
       value: 12.13
       objectReference: {fileID: 0}
+    - target: {fileID: 2037647226098969627, guid: 1658ce4bb288171499cb189179f0661a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bad
+      objectReference: {fileID: 0}
     - target: {fileID: 2539151905165291054, guid: 1658ce4bb288171499cb189179f0661a,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -97,6 +102,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: badFloor
+      objectReference: {fileID: 0}
+    - target: {fileID: 5626362480821493684, guid: 1658ce4bb288171499cb189179f0661a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Bad
       objectReference: {fileID: 0}
     - target: {fileID: 5740677496371152542, guid: 1658ce4bb288171499cb189179f0661a,
         type: 3}

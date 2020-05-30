@@ -530,51 +530,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1136221608, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1136221608, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1136221608, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1136221608, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
-      propertyPath: m_Intensity
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1136221608, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
-      propertyPath: m_LightVolumeOpacity
-      value: 0.512
-      objectReference: {fileID: 0}
-    - target: {fileID: 1136221608, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
-      propertyPath: m_ShadowVolumeIntensity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1136221608, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
-      propertyPath: m_ShadowIntensity
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1136221608, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
-      propertyPath: m_PointLightInnerRadius
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1136221608, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 15.66
-      objectReference: {fileID: 0}
     - target: {fileID: 2384342680845494758, guid: 1501de7a25091ac44a6c2d7cea6df0f8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.6586819
+      value: 6.38
       objectReference: {fileID: 0}
     - target: {fileID: 2384342680845494758, guid: 1501de7a25091ac44a6c2d7cea6df0f8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.434082
+      value: -15.94
       objectReference: {fileID: 0}
     - target: {fileID: 2384342680845494758, guid: 1501de7a25091ac44a6c2d7cea6df0f8,
         type: 3}
@@ -625,11 +589,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6328907651487752059, guid: 1501de7a25091ac44a6c2d7cea6df0f8,
-        type: 3}
-      propertyPath: m_FlipX
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
