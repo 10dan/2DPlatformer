@@ -6,6 +6,8 @@ public class EndPlatform : MonoBehaviour {
     [SerializeField] float glowSpeed = 1f;
     [SerializeField] float intensityModifier = 2f;
     [SerializeField] float initialIntensity = 1f;
+    [SerializeField] AudioClip endNoise;
+
     UnityEngine.Experimental.Rendering.Universal.Light2D light;
     void Start() {
         light = GetComponentInChildren<UnityEngine.Experimental.Rendering.Universal.Light2D>();
@@ -19,6 +21,7 @@ public class EndPlatform : MonoBehaviour {
         if(collision.collider.tag == "Player") {
             GameObject.Find("LevelComplete").GetComponent<EnableText>().SetTextVisible(true);
             GlobalVars.currentLevel += 1;
+            SoundManager.Instance.Play(endNoise);
             StartCoroutine(Delay(2f));
         }
     }

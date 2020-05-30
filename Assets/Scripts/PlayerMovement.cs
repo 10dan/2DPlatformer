@@ -63,7 +63,9 @@ public class PlayerMovement : MonoBehaviour {
     private void processMovement() {
         Vector2 v = rb.velocity;
         float horizontal = Input.GetAxis("Horizontal");
-        if(horizontal <= Mathf.Epsilon) {
+        if (horizontal < 0.001 && horizontal > -0.001) {
+            //DO NO FLIPING
+        } else if (horizontal <= Mathf.Epsilon) {
             GetComponent<SpriteRenderer>().flipX = false;
         } else {
             GetComponent<SpriteRenderer>().flipX = true;
@@ -75,11 +77,13 @@ public class PlayerMovement : MonoBehaviour {
 
     private void processJump() {
         if (Input.GetButtonDown("Jump") && jumpCount < maxJumps) {
-            anim.SetTrigger("hasJumped");
-            if(jumpCount >= 1) {
-                anim.SetTrigger("ShouldFlip");
-            }
             GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpVelocity;
+
+            if (jumpCount > 0) {
+                anim.SetTrigger("flip");
+            } else {
+                anim.SetTrigger("jump");
+            }
             jumpCount++;
         }
         if (rb.velocity.y < 0) {
@@ -150,6 +154,7 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
     private void OnCollisionEnter2D(Collision2D collision) {
+        anim.SetTrigger("hitGround");
         switch (collision.gameObject.tag) {
             case ("Ground"):
                 jumpCount = 0;
@@ -170,8 +175,8 @@ public class PlayerMovement : MonoBehaviour {
 
     private void takeDamage(int dmg) {
         //Check if dead.
-        hp-= dmg;
-        if(hp < 1) {
+        hp -= dmg;
+        if (hp < 1) {
             isDead = true;
             GameObject.Find("gameOver").GetComponent<EnableText>().SetTextVisible(true);
         }
@@ -181,7 +186,7 @@ public class PlayerMovement : MonoBehaviour {
         int randomSoundIndex = UnityEngine.Random.Range(0, bloodSounds.Length);
         audio.pitch = UnityEngine.Random.Range(0.5f, 1.5f);
         audio.PlayOneShot(bloodSounds[randomSoundIndex]);
-    
+
         //Make blood effect
         Instantiate(bloodParticle, transform.position, Quaternion.identity);
 
