@@ -909,8 +909,8 @@ Transform:
   - {fileID: 1195852561}
   - {fileID: 876915904}
   - {fileID: 1167046879}
-  - {fileID: 1158815885}
   - {fileID: 2076665613}
+  - {fileID: 1158815885}
   - {fileID: 880669605}
   m_Father: {fileID: 1629693436}
   m_RootOrder: 1
@@ -930,7 +930,7 @@ PrefabInstance:
     - target: {fileID: 2384342680845494758, guid: 1501de7a25091ac44a6c2d7cea6df0f8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7
+      value: -8.5
       objectReference: {fileID: 0}
     - target: {fileID: 2384342680845494758, guid: 1501de7a25091ac44a6c2d7cea6df0f8,
         type: 3}
@@ -982,6 +982,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 6328907651487752059, guid: 1501de7a25091ac44a6c2d7cea6df0f8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 8603369663158992956, guid: 839fc72abfbff104c9dde30b6d0b0f5b,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1501de7a25091ac44a6c2d7cea6df0f8, type: 3}
 --- !u!1 &708504143

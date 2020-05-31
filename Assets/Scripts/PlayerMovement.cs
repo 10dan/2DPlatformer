@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour {
             processGuns();
             processFlash();
             processCharge();
+            processOffScreen();
         }
     }
 
@@ -178,27 +179,37 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void takeDamage(int dmg) {
-        //Check if dead.
-        hp -= dmg;
-        if (hp < 1) {
-            isDead = true;
-            StartCoroutine(ResetLevel());
-            GameObject.Find("gameOver").GetComponent<EnableText>().SetTextVisible(true);
+        //only take damage if not already dead.
+        if (!isDead) {
+            //Check if dead.
+            hp -= dmg;
+            if (hp < 1) {
+                isDead = true;
+                anim.SetTrigger("death");
+                StartCoroutine(ResetLevel());
+                GameObject.Find("gameOver").GetComponent<EnableText>().SetTextVisible(true);
+            }
+
+            //play ouch sound
+            audio.Stop();
+            int randomSoundIndex = UnityEngine.Random.Range(0, bloodSounds.Length);
+            audio.pitch = UnityEngine.Random.Range(0.5f, 1.5f);
+            audio.PlayOneShot(bloodSounds[randomSoundIndex]);
+
+            //Make blood effect
+            Instantiate(bloodParticle, transform.position, Quaternion.identity);
+
+            //Shake camera
+            GameObject go = GameObject.Find("Main Camera");
+            CameraShake shaker = (CameraShake)go.GetComponent(typeof(CameraShake));
+            shaker.Shake(0.1f, 0.5f);
+            GameObject.Find("Score").GetComponent<CanvasOperator>().SetText("Lives:" + hp.ToString());
         }
+    }
 
-        //play ouch sound
-        audio.Stop();
-        int randomSoundIndex = UnityEngine.Random.Range(0, bloodSounds.Length);
-        audio.pitch = UnityEngine.Random.Range(0.5f, 1.5f);
-        audio.PlayOneShot(bloodSounds[randomSoundIndex]);
-
-        //Make blood effect
-        Instantiate(bloodParticle, transform.position, Quaternion.identity);
-
-        //Shake camera
-        GameObject go = GameObject.Find("Main Camera");
-        CameraShake shaker = (CameraShake)go.GetComponent(typeof(CameraShake));
-        shaker.Shake(0.1f, 0.5f);
-        GameObject.Find("Score").GetComponent<CanvasOperator>().SetText("Lives:" + hp.ToString());
+    private void processOffScreen() {
+        if(transform.position.y < -50) {
+            takeDamage(1000);
+        }
     }
 }
